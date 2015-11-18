@@ -1,0 +1,26 @@
+{
+  "name": "dirscan",
+  "version": "0.1.0",
+  "description": "An example of using streams to read dir structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "streams",
+    "files",
+    "dirs"
+  ],
+  "author": "Charandas Batra-Daitch",
+  "license": "ISC",
+  "dependencies": {
+    "event-stream": "^3.3.2",
+    "hasha": "^2.0.2",
+    "highland": "^2.5.1",
+    "readdirp": "^2.0.0",
+    "yargs": "^3.30.0"
+  },
+  "devDependencies": {
+    "eslint": "^1.9.0"
+  }
+}
