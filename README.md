@@ -39,7 +39,7 @@ Requires:
 CLI Arguments
 -------------
 ```bash
-npm start
+node index.js
 ```
 
 1. `-f, --filter`: filter for files, specify a glob pattern, defaults to `*.*`
