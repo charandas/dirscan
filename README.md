@@ -26,10 +26,24 @@ their consumers draw out their food.
 4. Lastly, it logs out an array of arrays to the console for all hashes, that
 captured more than 1 file.
 
-Command Line Arguments
-----------------------
-1. `-f, --filter`: filter for files, specify a glob pattern
-2. `-d, --dir`: directory to execute the scan in
+Requisites
+-----------
+
+Requires:
+```js
+"engines" : {
+  "node" : "> 4.2.2"
+}
+```
+
+CLI Arguments
+-------------
+```bash
+npm start
+```
+
+1. `-f, --filter`: filter for files, specify a glob pattern, defaults to `*.*`
+2. `-d, --dir`: directory to execute the scan in, default to `node_modules`
 
 Resourses
 ---------

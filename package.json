@@ -4,6 +4,7 @@
   "description": "An example of using streams to read dir structures",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -22,5 +23,12 @@
   },
   "devDependencies": {
     "eslint": "^1.9.0"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/charandas/dirscan.git"
+  },
+  "engines" : {
+    "node" : "> 4.2.2"
   }
 }
