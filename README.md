@@ -7,7 +7,7 @@ in an arbitrarily deep filesystem tree.
 Synopsis
 --------
 
-1. sh1 sums can be used to determine whether file content is same.
+1. sha1 sums can be used to determine whether file content is same.
 2. Using streams for sha1 as well as directory scans makes sense, as there
 is backpressure management provided for free. Streams are lazy and they work out as
 their consumers draw out their food.
