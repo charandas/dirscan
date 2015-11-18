@@ -12,7 +12,7 @@ Synopsis
 is backpressure management provided for free. Streams are lazy and they work out as
 their consumers draw out their food.
 3. The algorithm computes a object like so:
-  ```js
+  ```
   {
     "79239999d":["0.copy.test","0.test"],
     "01e554876":["1.copy.test","1.test"],
