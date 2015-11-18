@@ -26,25 +26,11 @@ _(stream)
 		return x.stat.isDirectory();
 	})
 	.map((x) => {
-		return {path: x.path, hashPromise: hasha.fromFile(x.fullPath)};
+		return _(hasha.fromFile(x.fullPath).then((hash) => {
+			return {path: x.path, hash: hash};
+		}));
 	})
-	.consume(function (err, x, push, next) {
-		if (err) {
-			// pass errors along the stream and consume next value
-			push(err);
-			next();
-		}
-		else if (x === _.nil) {
-			// pass nil (end event) along the stream
-			push(null, x);
-		}
-		else {
-			x.hashPromise.then((hash) => {
-				push(null, {path: x.path, hash: hash});
-				next();
-			});
-		}
-	})
+	.parallel(100)
 	.reduce({}, (result, x) => {
 		result[x.hash] = result[x.hash] || [];
 		result[x.hash].push(x.path);
