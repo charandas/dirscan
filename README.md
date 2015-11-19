@@ -11,7 +11,8 @@ Synopsis
 2. Using streams for sha1 as well as directory scans makes sense, as there
 is backpressure management provided for free. Streams are lazy and they work out as
 their consumers draw out their food.
-3. The algorithm computes a `Map` like so:
+3. The algorithm computes a `Map` like so using a `reduce` operation on a computed stream of
+`{path: path, hash: hash}`:
   ```
   {
     "79239999d":["0.copy.test","0.test"],
@@ -43,8 +44,9 @@ CLI Arguments
 node index.js
 ```
 
-1. `-f, --filter`: filter for files, specify a glob pattern, defaults to `*.*`
-2. `-d, --dir`: directory to execute the scan in, default to `node_modules`
+1. `-f, --filter`: Filter files by a glob pattern such as `*.js`, defaults to `*.*`.
+2. `-d, --dir`: Directory to find files with identical contents, relative or absolute, default to `node_modules`.
+3. `-p, --parallel`: Threshold to control how many hashes are computed in parallel before the `reduce` operation.
 
 Resourses
 ---------

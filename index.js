@@ -8,16 +8,24 @@ const path = require('path');
 const argv = require('yargs')
 	.demand('d')
 	.alias('d', 'dir')
-	.describe('d', 'Directory to find files with identical contents')
+	.describe('d', 'Directory to find files with identical contents, relative or absolute')
 	.nargs('d', 1)
 	.default('d', 'node_modules')
 	.alias('f', 'filter')
 	.describe('f', 'Filter files by a glob pattern such as *.js')
 	.nargs('f', 1)
 	.default('f', '*.*')
+	.alias('p', 'parallel')
+	.describe('p', 'Threshold to control how many hashes are computed in parallel before the reduce operation')
+	.nargs('p', 1)
+	.default('p', 100)
 	.argv;
 
-const stream = readdirp({ root: path.join(__dirname, argv.dir), fileFilter: argv.filter})
+
+// Relative or absolute
+const dirPath = argv.dir.indexOf('/') > 0 ? path.join(__dirname, argv.dir) : argv.dir;
+
+const stream = readdirp({ root: dirPath, fileFilter: argv.filter})
 	.on('warn', (err) => {
 		console.error('non-fatal error', err);
 	})
@@ -32,7 +40,7 @@ _(stream)
 			return {path: x.path, hash: hash};
 		}));
 	})
-	.parallel(100)
+	.parallel(argv.parallel)
 	.reduce(new Map(), (result, x) => {
 
 		let filesForHash = result.get(x.hash);
