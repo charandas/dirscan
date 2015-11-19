@@ -8,9 +8,8 @@ Synopsis
 --------
 
 1. sha1 sums can be used to determine whether file content is same.
-2. Using streams for sha1 as well as directory scans makes sense, as there
-is backpressure management provided for free. Streams are lazy and they work out as
-their consumers draw out their food.
+2. Using streams for sha1 and the consequent `reduce` operation makes sense, as there
+is backpressure management provided for free. For `readdirp`, we do not get that, see [readdirp-code](https://github.com/thlorenz/readdirp/blob/master/stream-api.js#L22) for details. Nevertheless, stream interface does provide readability over imperative code, as we see the set of operations specified declaratively.
 3. The algorithm computes a `Map` like so using a `reduce` operation on a computed stream of
 `{path: path, hash: hash}`:
   ```
