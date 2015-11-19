@@ -18,7 +18,7 @@ const argv = require('yargs')
 	.alias('p', 'parallel')
 	.describe('p', 'Threshold to control how many hashes are computed in parallel before the reduce operation')
 	.nargs('p', 1)
-	.default('p', 100)
+	.default('p', 10000)
 	.argv;
 
 

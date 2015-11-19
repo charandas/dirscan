@@ -17,7 +17,7 @@
   "dependencies": {
     "hasha": "^2.0.2",
     "highland": "^2.5.1",
-    "readdirp": "^2.0.0",
+    "readdirp": "https://github.com/toddself/readdirp.git#pauseable-streams",
     "yargs": "^3.30.0"
   },
   "devDependencies": {
