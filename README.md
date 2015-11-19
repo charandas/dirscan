@@ -11,7 +11,7 @@ Synopsis
 2. Using streams for sha1 as well as directory scans makes sense, as there
 is backpressure management provided for free. Streams are lazy and they work out as
 their consumers draw out their food.
-3. The algorithm computes a object like so:
+3. The algorithm computes a `Map` like so:
   ```
   {
     "79239999d":["0.copy.test","0.test"],
@@ -24,7 +24,8 @@ their consumers draw out their food.
   }
   ```
 4. Lastly, it logs out an array of arrays to the console for all hashes, that
-captured more than 1 file.
+captured more than 1 file. It does so by transforming the aforementioned `Map` to
+an array.
 
 Requisites
 -----------

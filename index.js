@@ -1,3 +1,5 @@
+'use strict';
+
 const readdirp = require('readdirp');
 const _ = require('highland');
 const hasha = require('hasha');
@@ -16,10 +18,10 @@ const argv = require('yargs')
 	.argv;
 
 const stream = readdirp({ root: path.join(__dirname, argv.dir), fileFilter: argv.filter})
-	.on('warn', function (err) {
+	.on('warn', (err) => {
 		console.error('non-fatal error', err);
 	})
-	.on('error', function (err) { console.error('fatal error', err); });
+	.on('error',(err) => { console.error('fatal error', err); });
 
 _(stream)
 	.reject(x => {
@@ -31,20 +33,25 @@ _(stream)
 		}));
 	})
 	.parallel(100)
-	.reduce({}, (result, x) => {
-		result[x.hash] = result[x.hash] || [];
-		result[x.hash].push(x.path);
+	.reduce(new Map(), (result, x) => {
+
+		let filesForHash = result.get(x.hash);
+
+		if (!filesForHash) {
+			filesForHash = [];
+			result.set(x.hash, filesForHash);
+		}
+
+		filesForHash.push(x.path);
 		return result;
 	})
-	.apply(function(x) {
-		const keys = Object.keys(x);
-		const result = keys.reduce((result, key) => {
-			// If content existed in more than 1 file, include it in final result
-			if (x[key].length > 1) {
-				result.push(x[key]);
+	.apply((x) => {
+		let result = [];
+		x.forEach((value) => {
+			if (value.length > 1) {
+				result.push(value);
 			}
-			return result;
-		}, []);
+		});
 
 		if (result.length) {
 			console.log('Here are files grouped by same content:');
@@ -52,5 +59,8 @@ _(stream)
 		} else {
 			console.log('No files with same content were found.');
 		}
-
 	});
+
+process.on('uncaughtException', (err) => {
+	console.log('Caught exception: ' + err);
+});
