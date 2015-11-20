@@ -13,7 +13,7 @@
     "dirs"
   ],
   "author": "Charandas Batra-Daitch",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "hasha": "^2.0.2",
     "highland": "^2.5.1",
